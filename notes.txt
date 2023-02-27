@@ -1,0 +1,70 @@
+<---------------------------------Thread Class vs Runnable Interface--------------------------------->
+
+1. - If we extend the Thread class, our class cannot extend any other class because Java doesn’t support multiple inheritance. 
+   - But, if we implement the Runnable interface, our class can still extend other base classes.
+   
+2. - We can achieve basic functionality of a thread by extending Thread class because it provides some inbuilt methods
+	 like yield(), interrupt() etc. that are not available in Runnable interface.
+   - Using runnable will give you an object that can be shared amongst multiple threads. 
+   
+<---------------------------------Anonymous Classes --------------------------------->   
+
+Anonymous classes enable you to make your code more concise. 
+They enable you to declare and instantiate a class at the same time.
+
+
+<---------------------------------Executor Service --------------------------------->   
+Some types of Java Executors are listed below:
+
+
+1.SingleThreadExecutor
+2.FixedThreadPool(n)+
+3.CachedThreadPool
+4.ScheduledExecutor
+
+Executor 1: SingleThreadExecutor 
+
+		- A single thread pool can be obtained by calling the static newSingleThreadExecutor() method of the Executors class. 
+		- It is used to execute tasks sequentially.
+
+Syntax: ExecutorService executor = Executors.newSingleThreadExecutor();
+
+
+
+Executor 2: FixedThreadPool(n)
+
+		- It is a thread pool of a fixed number of threads. 
+		- The tasks submitted to the executor are executed by the n threads. 
+		- If there is more task they are stored on a LinkedBlockingQueue. It uses Blocking Queue.
+
+Syntax:ExecutorService fixedPool = Executors.newFixedThreadPool(2);
+
+
+Executor 3: CachedThreadPool
+
+		- Creates a thread pool that creates new threads as needed
+		- But will reuse previously constructed threads when they are available. 
+		- Calls to execute will reuse previously constructed threads if available. 
+		- If no existing thread is available, a new thread will be created and added to the pool.
+		-  It uses a SynchronousQueue queue.
+
+Syntax: ExecutorService executorService = Executors.newCachedThreadPool();
+
+
+Executor 4: ScheduledExecutor
+
+		- Scheduled executors are based on the interface ScheduledExecutorService which extends the ExecutorService interface. 
+		- This executor is used when we have a task that needs to be run at regular intervals or if we wish to delay a certain task.
+
+Syntax: ScheduledExecutorService scheduledExecService = Executors.newScheduledThreadPool(1);
+
+The tasks can be scheduled using either of the two methods:
+		1. scheduleAtFixedRate: Executes the task with a fixed interval, irrespective of when the previous task ended.
+		2.scheduleWithFixedDelay: This will start the delay count down only after the current task completes.
+		
+Syntax:		-scheduledExecService.scheduleAtFixedRate(Runnable command, long initialDelay, long period, TimeUnit unit)
+			-scheduledExecService.scheduleWithFixedDelay(Runnable command, long initialDelay, long period, TimeUnit unit)
+			
+			
+			
+			
